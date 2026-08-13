@@ -1,0 +1,18 @@
+# Preface {.unnumbered}
+
+The Childcare Initiative relies on two CAPI questionnaires that are globally harmonized but contextually adaptable:
+
+- Demand-side
+- Supply-side
+
+Being globally harmonized, the content of these CAPI questionnaires should, as a rule, remain the same from one country deployment to the next (e.g., questions, answer options, variable names, etc.)
+
+Being contextually adaptable, however, the CAPI questionnaires contain areas where content must be changed to reflect the context of the country in which the questionnaire is being deployed (e.g., survey implementer details, schooling system, deployment language(s), etc).
+
+This document aims to walk survey implementers through what CAPI content to change and how.
+
+- **Adapt.** Which questionnaire objects to change and how, going thematic area by thematic area. Most changes are mandatory. Some are optional.
+- **Generate.** How to generate images that will be shown as part of the interview, some programmatically with code and some manually from a template
+- **Upload.** How to attach the generated images to questionnaire objects such that these images such that they will be shown by the CAPI application.
+- **Finalize.** Which changes to make before deployment. How to test that everything works correctly.
+- **Deploy.** How to generate random numbers to facilitate randomization. How to integrate those numbers into survey assignments so that each assignment has its own random selections.

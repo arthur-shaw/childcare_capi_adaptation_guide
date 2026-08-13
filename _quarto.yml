@@ -1,0 +1,50 @@
+project:
+  type: book
+
+book:
+  title: "Childcare CAPI Adaptation Guide"
+  author: "LSMS Team"
+  chapters:
+    - index.qmd
+    # Adapt
+    - part: adapt.qmd 
+      chapters:
+        # demand-side chapters
+        - adapt_demand.qmd
+        - country.qmd
+        - implementer.qmd
+        - eligibility.qmd
+        - school.qmd
+        - context.qmd
+        - experiments.qmd
+        - language.qmd
+        # supply-side chapters
+        - adapt_supply.qmd
+    # Generate
+    - part: generate.qmd
+      chapters: 
+        - dce_images.qmd
+        - likert_scale_image.qmd
+    # Upload
+    - part: upload.qmd
+      chapters: 
+        - upload_dce_images.qmd
+        - upload_likert_images.qmd
+    # Finalize
+    - part: "Finalize"
+      chapters: 
+        - hide_numbers.qmd
+        - test.qmd
+    # Deploy
+    - part: deploy.qmd
+      chapters: 
+        - numbers.qmd
+        - assignments.qmd
+    # Add an appendix for frequently described workflows
+    - part: "Appendix"
+      chapters: 
+        - variable_values.qmd
+        - reusable_answer_options.qmd
+format:
+  html:
+    theme: cosmo
