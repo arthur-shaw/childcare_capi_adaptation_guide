@@ -4,6 +4,8 @@ project:
 book:
   title: "Childcare CAPI Adaptation Guide"
   author: "LSMS Team"
+  repo-url: https://github.com/arthur-shaw/childcare_capi_adaptation_guide
+  repo-actions: [edit, issue]
   chapters:
     - index.qmd
     # Adapt
