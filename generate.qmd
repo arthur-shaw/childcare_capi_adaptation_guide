@@ -1,0 +1,5 @@
+# Generate
+
+The CAPI questionnaries rely both on CAPI content and externally generated content. The previous section dealt with the CAPI content. This seciton will cover how to generate the external content--in particular, images to show respondents and random numbers to dicate which images should be shown.
+
+🚧 Coming soon, after projects for generating this content have been updated. 🚧

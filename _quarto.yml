@@ -23,10 +23,11 @@ book:
         # supply-side chapters
         - adapt_supply.qmd
     # Generate
-    # - part: generate.qmd
+    - part: generate.qmd
     #   chapters: 
     #     - dce_images.qmd
     #     - likert_scale_image.qmd
+    #     - numbers.qmd
     # Upload
     # - part: upload.qmd
     #   chapters: 
@@ -40,7 +41,7 @@ book:
     # Deploy
     # - part: deploy.qmd
     #   chapters: 
-    #     - numbers.qmd
+    #     - numbers_for_testing.qmd
     #     - assignments.qmd
     # Add an appendix for frequently described workflows
     # - part: "Appendix"
