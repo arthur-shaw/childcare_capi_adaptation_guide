@@ -1,0 +1,11 @@
+# Implementer
+
+In the consent script, the questionnaire informs respondents who is conducting the survey and who to contact in the event of concerns or questions.
+
+To provide these values, navigate to the following variables in [section 0](https://designer.mysurvey.solutions/q/details/634a3bb2e2914cbdbef06b760655c4e2/chapter/4d0297a8722c3f3c745264fc662e9fda/group/4d0297a8722c3f3c745264fc662e9fda):
+
+- `name_of_survey_firm`. Name of the survey firm.
+- `survey_phone_number`. Phone number for the survey firm's contact person.
+- `survey_contact_person`. Name of the survey firm's contact person.
+
+For more details on the process, read [here](variable_values.qmd).

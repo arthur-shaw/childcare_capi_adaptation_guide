@@ -1,0 +1,37 @@
+# Eligibility
+
+Within the CAPI application, respondent eligibility is dicated by age for two groups:
+
+- Respondents
+- Children
+
+## Respondent
+
+For respondents, implementers must determine the minimum age for an "adult" respondent. The default is 15. The implementer may modify this as needed.
+
+To so so:
+
+- Navigate to `minimum_respondent_age` in [section 0](https://designer.mysurvey.solutions/q/details/634a3bb2e2914cbdbef06b760655c4e2/chapter/4d0297a8-722c-3f3c-7452-64fc662e9fda/group/4d0297a8-722c-3f3c-7452-64fc662e9fda)
+- Change the numeric value in the `Expression` field
+
+## Children
+
+For children, there are are two target age groups:
+
+- Younger than school-age
+- School-age
+
+### Younger than school-age
+
+For younger children, the implementer needs set two variable values:
+
+- `age_threshold_younger_children`. Age at which children enter school. Younger children are aged `age_threshold_younger_children - 1`.
+- `age_lower_bound_younger_children`. Age at which children are too young to have childcare arrangements interesting for this study. Note: this age should be understood as 0 years and the number of months old. Children this age or younger are excluded from discussions in module 4 on childcare arrangements.
+
+Both variables can be found in section 0 of the CAPI application.
+
+### School-age
+
+For school-age children, the implementer needs to set the upper end of the range for school-aged children that need or typically use childcare.
+
+This value is captured in `age_threshold_older_children`.

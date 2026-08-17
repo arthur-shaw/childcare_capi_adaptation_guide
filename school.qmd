@@ -1,0 +1,90 @@
+# School
+
+## School year
+
+Several questions reference the current school year.
+
+To set the value:
+
+- Navigate to `current_school_year` in section 0
+- Change the value in the `Expression` field (e.g., `"2026/27"`)
+
+## Schooling levels
+
+Several questions ask about the respondent's educational attainment in terms of educational level.
+
+To provide country-specific answer options:
+
+- Find `schooling_levels` in the `Categories`
+- Provide answer options
+
+See [reusable categories](reusable_categories.qmd) for more details on the process.
+
+## When school opens and closes
+
+In questions `s08q05` and `s08q06`, the application contains validations comparing drop-off and pick-up times against school opening and closing times, respectively.
+
+### Opening time
+
+To help flag drop-offs that are too early, the implementer needs to indicate the earliest that schools typically open.
+
+To do so,
+
+- Navigate to `s08q05`
+- Modify the time in validation condition 2
+
+In that validation condition, the school opening time is set as 07:00--or `new TimeSpan(7, 0, 0)`, where the first position in `TimeSpan()` is the hour in 24-hour format, the second the minutes, and the last the seconds.
+
+```cpp
+// start time
+(TimeSpan.Parse(s08q05.Replace(" ", "")))
+
+>=
+
+// 07:00
+new TimeSpan(7, 0, 0)
+```
+
+To set the opening time as 08:30, for example, one would write `new TimeSpan(8, 30, 0)`
+
+### Closing time
+
+To flag pick-up times that are too late, the implementer needs to provide the latest typical school closing time.
+
+To do so, follow the same process as above:
+
+- Navigate to `s08q06`
+- Modify the time, as needed--where `new TimeSpan(16, 0, 0)` is 16:00 (or 4PM) and where the first position in `TimeSpan()` is the hour in 24-hour format, the second the minutes, and the last the seconds.
+
+```cpp
+// 16:00
+new TimeSpan(16, 0, 0)
+
+>=
+
+// closing time
+(TimeSpan.Parse(self.Replace(" ", ""))) 
+```
+
+## Early drop-off and late pick-up services
+
+For some questions in module 8, the question text needs to display the services that are used.
+
+To create this text, the CAPI questionnaire computes the text in `s08_SERVICES` via a string variable:
+
+```cpp
+(s08q08 == 1 && s08q12 == 1)  ? "early drop-off and late pick-up services":
+(s08q08 == 1 && s08q12 != 1) ? "early drop-off ":
+(s08q08 != 1 && s08q12 == 1) ? "late pick-up services": ToString()
+```
+
+By default, this text is in English. For deployments in other languages, replace the strings with local-language equivalents.
+
+Since the this text is computed dynamically rather than defined as part of the questionnaire, the translation needs to appear in the expression above.
+
+To change these values:
+
+- Navigate to `s08_SERVICES`
+- Replace the values in `""` with the desired translations
+
+Note: this currently supports a single language only. Consider using the main language spoken in the country.

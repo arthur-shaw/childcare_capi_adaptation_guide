@@ -1,0 +1,177 @@
+# Context
+
+To this point, adaptations have addressed core parts of the survey design.
+
+For this section, the adaptations concern disparate elements of country context:
+
+- Phone numbers
+- Currency
+- Popular "gig economy" apps
+- National business register
+
+## Phone numbers
+
+<!-- Several questions in the questionnaire capture the phone number of respondents.
+
+So that these data are captured correctly, the implementer needs to describe:
+
+- **Format.** To capture phone numbers in the first place, one needs to specify the number of digits involved and the grouping (e.g. `## ## ## ##`).
+- **Valid prefixes.** To ensure that caputred phone numbers are correct, one should describe which phone numbers are valid by identifying phone number prefixes that are assigned for the country's telecom carriers. -->
+
+### Format
+
+Several questions capture phone numbers as text that follows a specific pattern (i.e., a certain number of digits). See more [here](https://docs.mysurvey.solutions/questionnaire-designer/questions/text-question/#options).
+
+To adapt this pattern to the local context:
+
+- Open the macros `$m` in the left-hand panel
+- Find the `phone_number_format` macro
+- Provide the phone number format, where `#` is a number and spaces and other decorations can be provided as needed (e.g. `## ## ## ##` or `(###) ### ####`)
+- Click on `SAVE`
+
+### Valid prefixes
+
+Even if phone numbers fit the pattern described above, there is no guarantee that they are valid phone numbers.
+
+To validate them, implementers should write a condition that lists all known phone number prefixes--that is, the starts of phone numbers that are allocated by the telecom authority to telecom providers.
+
+To establish this list, implementers should rely on a combination of official documentation and local knowledge. For documentation:
+
+- Navigate to the [national numbering plans page of the International Telecommunication Union](https://www.itu.int/oth/T0202.aspx?lang=en&parent=T0202)
+- Search for the country name
+- Download the latest document
+- Convert the tables of assignments into conditions
+
+
+For example, consider this excerpt for fixed line numbers allocated to the telecom operator Expresso in Sénégal:
+
+| Prefix | BP | Maximum length | Minimum length | Usage of E.164 number | Additional information |
+| --- | --- | --- | --- | --- | --- |
+| 30 | 10X XXXX | 9 | 9 | CDMA fixed telephony | Expresso Sénégal |
+| 30 | 11X XXXX | 9 | 9 | CDMA fixed telephony | Expresso Sénégal |
+| 30 | 12X XXXX | 9 | 9 | CDMA fixed telephony | Expresso Sénégal |
+| 30 | 80X XXXX | 9 | 9 | CDMA fixed telephony | Expresso Sénégal |
+
+From this, one can see that numbers starting with the following are valid phone numbers for fixed lines for Expresso:
+
+- `30 10X XXXX`
+- `30 11X XXXX`
+- `30 12X XXXX`
+- `30 80X XXXX`
+
+where `X` is any number.
+
+To adapt the validation expression to the local context:
+
+- Open the macros `$m` in the left-hand panel
+- Find the `validate_phone_number` macro
+- Modify the expression
+- Click on `SAVE` to save
+- Press `COMPILE` to confirm that the expression is valid syntax
+
+To see this in practice, consider the example from Expresso Sénégal above.
+
+First, notice that the condition for `validate_phone_number` in the global questionnaire is of the following form:
+
+```cpp
+// Telecom provider 1
+(
+self.StartsWith("123") ||
+self.StartsWith("124")
+)
+||
+// Telecom provider 2
+(
+self.StartsWith("125") ||
+self.StartsWith("126")
+)
+```
+
+To unpack this:
+
+- There is one block per telecom provider, each block being separated by or (`||`)
+- Within each block, there is one or more `self.StartsWith()` expressions
+- Within that expression, one finds a string containing the first N characters of a number allocated to the telecom provider
+
+Now, let's return to the prefix allocation table and construct an expression that captures that information.
+
+Here again is the prefix allocation table for Expresso:
+
+| Prefix | BP | Maximum length | Minimum length | Usage of E.164 number | Additional information |
+| --- | --- | --- | --- | --- | --- |
+| 30 | 10X XXXX | 9 | 9 | CDMA fixed telephony | Expresso Sénégal |
+| 30 | 11X XXXX | 9 | 9 | CDMA fixed telephony | Expresso Sénégal |
+| 30 | 12X XXXX | 9 | 9 | CDMA fixed telephony | Expresso Sénégal |
+| 30 | 80X XXXX | 9 | 9 | CDMA fixed telephony | Expresso Sénégal |
+
+From that table, one can infer two pieces of information:
+
+1. Phone number formats in Sénégal should follow this pattern: `## ### ####`.
+2. Prefixes for Expresso start with `30 ` and have two more numbers thereafter
+
+Translating this into an expression, we get the following for Expresso:
+
+```cpp
+// Expresso
+(
+// fixed lines
+self.StartsWith("30 10") ||
+self.StartsWith("30 11") ||
+self.StartsWith("30 12") ||
+self.StartsWith("30 80")
+)
+```
+
+## Currency
+
+For many currencies, prices are typically in multiples of the smallest denomination bill or coin--for example, a multiple of 5, 10, or 100.
+
+To reflect this reality and flag any values that do not conform to this expecctation, the implementer can modify the expression in `currency_is_multiple_of_n`.
+
+To do so:
+
+- Open the macros `$m` in the left-hand panel
+- Find the `currency_is_multiple_of_n` macro
+- Modify the expression
+- Click on `SAVE` to save
+- Press `COMPILE` to confirm that the expression is valid syntax
+
+When modifying the expression, replace `5` with the value that most prices are a multiple of.  
+
+To understand the expression, let's focus on the core
+
+```cpp
+// ... then all currency values are multiples of that value
+((self%5)==0)
+```
+
+This translates, roughly, to:
+
+- Divide the value (`self`) by the multiple (in this case, `5`)
+- Check whether the remainder is equal to zero
+
+In the expression above, `%` is the [modulo operator](https://en.wikipedia.org/wiki/Modulo).
+
+## Popular apps
+
+There are several questions in the questionnaire that ask about employment with "gig economy" apps.
+
+Since the indicative list of apps may vary from one country to the next, the implementer should provide a country-specific list in `popular_apps` whose text will appear in `s03q10` and `s04bq07`.
+
+To do so,
+
+- Navigate to the `popular_apps` variable in section 0
+- Modify the string value in the `Expression` field
+- Click `SAVE`
+
+## National business register
+
+There are a few questions in the questionnaire that ask about business registration with the national business registrar.
+
+To change the name in one place rather than in several, there is a variable that captures this value: `national_business_register`
+
+To do so,
+
+- Navigate to the `national_business_register` variable in section 0
+- Modify the string value in the `Expression` field
+- Click `SAVE`

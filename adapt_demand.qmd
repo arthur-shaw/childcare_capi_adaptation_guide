@@ -1,0 +1,11 @@
+# Demand-side {.unnumbered}
+
+For the demand-side questionnaire, survey implementers need to provide several types of values that this guide has grouped by theme: 
+
+- **Country.** Name and administrative divisions of the country.
+- **Implementer.** Name and contacts of the survey implementer.
+- **Eligibility.** Age ranges for children targetted by the study and for "adult" respondents.
+- **School.** School year, levels, and operational times.
+- **Country context.** Phone number formats, valid telecom prefixes, currency format, and names of popular "gig economy" apps and the national business registry.
+- **Experiments.** Names for characters in experimental vignettes.
+- **Language.** Interview languages, two-character codes for inteview languages, and translations for the questionnaire content.

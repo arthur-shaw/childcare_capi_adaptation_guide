@@ -1,0 +1,77 @@
+# Country
+
+There are two values that define the country:
+
+- Country name
+- Administrative divisions
+
+## Country name
+
+The country name is captured in the `name_of_country` variable and displayed in all text that references this variable.
+
+To provide a country name:
+
+- Navigate to the variable [here](https://designer.mysurvey.solutions/q/details/634a3bb2e2914cbdbef06b760655c4e2/chapter/4d0297a8-722c-3f3c-7452-64fc662e9fda/variable/5263b2d56e5b9d8c297cbbb7e649ef7d), in the section 0
+- Provide a value in the `Expression` field (e.g., `"Wakanda"`)
+
+## Administrative divisions
+
+To help identify households, the questionnaire captures household location through several complementary means in [section A-1](https://designer.mysurvey.solutions/q/details/634a3bb2e2914cbdbef06b760655c4e2/chapter/62e1058e218749f1ae5521b27399fbfd/group/62e1058e218749f1ae5521b27399fbfd) (e.g., political division, statistical division, sampling number, GPS, etc.)
+
+There are two that survey implementers should modify:
+
+- **Admin 1.** This is top-level or primary administrative division of the country (e.g., region, state, etc.)
+- **Admin 2.** This is the next level of administrative division within the top-level division.
+
+### Admin 1
+
+#### Name
+
+Since each country has its own country-specific name for the top-level administrative division, the name of this division needs to be changed.
+
+To do so:
+
+- Navigate to the `admin1` question ([here](https://designer.mysurvey.solutions/q/details/634a3bb2e2914cbdbef06b760655c4e2/chapter/62e1058e218749f1ae5521b27399fbfd/question/a96be0b178eb4acb9590e06017684dc2))
+- Change the text:
+  - Variable label. This label will describe the variable in the data.
+  - Question text. This text will be what the interviewer see.s
+
+#### Values
+
+Since administrative divisions are unique to each country, the possible values of those divisions are too.
+
+Accordingly, change values and associated value labels for the levels of this division. To do so:
+
+- Open `Categories` in the panel on the left
+- Find `admin1_codes`
+- Click on `EDIT CATEGORIES`
+- Replace the placeholder categories with those those for the current country.
+
+### Admin 2
+
+#### Name
+
+Just like the top-level administrative division:
+
+- Navigate to `admin2` ([here](https://designer.mysurvey.solutions/q/details/634a3bb2e2914cbdbef06b760655c4e2/chapter/62e1058e218749f1ae5521b27399fbfd/question/5d37051c239882648fe2e3cb39688ef5))
+- Change the text:
+  - Variable label. This label will describe the variable in the data.
+  - Question text. This text will be what the interviewer see.s
+
+#### Values
+
+To modify the values of the second-level administrative divisions, follow the same process as for the top-level administrative division--with a twist:
+
+- Open `Categories` in the panel on the left
+- Find `admin1_codes`
+- Click on `EDIT CATEGORIES`
+- Replace the placeholder categories with those those for the current country.
+
+As for the twist, the categories consist of two pieces:
+
+- Categories for the current level
+- Value for the parent level
+
+By specifying categories in this way, Designer understands which `admin2` categories to display for each value of `admin1`.
+
+See more details on how to add those categories [here](https://docs.mysurvey.solutions/questionnaire-designer/toolbar/reusable-categories/)

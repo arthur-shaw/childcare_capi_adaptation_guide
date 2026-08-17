@@ -1,0 +1,9 @@
+# Adapt
+
+The CAPI questionnaires are designed to be used in multiple countries. They therefore have two components: a common core that should remain consistent across deployments and country-specific elements that must be adapted to the local context.
+
+One way to think about the questionnaires is as standardized templates. Most of the template is already defined and should not be changed. Other parts are deliberately left open for the country to specify--for example, the survey implementer, schooling system, or interview language. Adaptation means completing and configuring these country-specific parts while preserving the common core.
+
+In programming terms, you could think of the global questionnaire as a function and the country-specific information as its parameters. The function contains the core logic; the parameters tell it what should differ for a particular country. The goal of adaptation is therefore generally to provide the appropriate country-specific values, not to change the underlying logic.
+
+This distinction is important throughout this guide. Unless a section explicitly instructs you to do so, do not modify the common questionnaire content, structure, variable names, or logic. Instead, make the changes identified as part of country adaptation.

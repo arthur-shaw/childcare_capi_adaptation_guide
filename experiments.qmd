@@ -1,0 +1,16 @@
+# Experiments
+
+## Social norms
+
+For the experiment in section 7A, there are vignettes that that mention a man and a woman.
+
+So that these names fit the local contact, change the values of the following variables found in the beginning of section 0:
+
+- `s07a_13a_woman_name`
+- `s07a_13a_man_name`
+
+To do so:
+
+- Navigate to the variable
+- Change the value in the `Expression` field
+- Save

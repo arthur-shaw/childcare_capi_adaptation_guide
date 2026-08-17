@@ -1,0 +1,177 @@
+# Languages
+
+While the global application has been developed in English, it will be deployed in a different set of languages for each country.
+
+The interview language matters in several ways. First, it describes the interview process--that is, what language was used to conduct the interview. Second, it determines the language in which the questionnaire text and other interview assets should be shown.
+
+## Interview languages
+
+There are two questions in the questionnaire that capture the interview langauge--one at the beginning of the interview and one at the end.
+
+Rather than chang the list of languages in two places, implementers need to modify a reusable category that is used in both places.
+
+To do so,
+
+- Open the reusable categories pane from the left-hand panel
+- Find `interview_language`
+- Click on `EDIT CATEGORIES`
+- Modify the categories, as needed
+- Click on `APPLY CHANGES`
+
+## Interview language codes
+
+The interview language selected in question `s00q12` determines the language of the discrete choice experiment (DCE) images shown in section 4D.
+
+The language selection does so as follows:
+
+- The variable `lang_code` in section 0 translates numeric selections into two-letter language codes that are used to index DCE images by language (e.g., if 1 is French, 2 is Wolof, etc., then lang_code will have corresponding letter codes such as `fr` for French and `wo` for Wolof).
+- The variables `r1` through `r6` in section 4D use this two-letter language code to determine the language of the image to show (e.g. if image 03 is chosen randomly, then `fr` will show `image_03_fr`, an image in French, while `wo` will show `image_03_wo`, an image in Wolof)
+
+While variables `r1` through `r6` should not be modified, the variable `lang_code` should be. This variable provides a user-provided mapping between values of `interview_language` (above) and two-letter language codes.
+
+### Process
+
+To make this modification, follow these steps:
+
+1. Collect the list of interview langauges from `interview_language`
+2. Collect the two-letter ISO 639 language code for each language
+3. Update the expression in `lang_code`
+
+#### Collect the list of interview langauges from `interview_language`
+
+- Open the reusable categories pane from the left-hand panel
+- Find `interview_language`
+- Click on `EDIT CATEGORIES`
+- Click on `TEXT VIEW`
+- Copy from Designer
+- Paste into a text document where additional editing will occur
+
+#### Collect the two-letter ISO 639 language code for each language
+
+- Navigate to the [repository of language codes](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)
+- Find or create a two-letter ISO 639 language code for each of them
+  - Navigate to the list of ISO language codes
+  - If there is an entry in `Set 1`, use it
+  - If there is no entry, create one, either by shortening a longer code or creating a new one, making sure that this code is not used by another language
+
+#### Update the expression in `lang_code`
+
+- Navigate to `lang_code`
+- Modify the pair of numeric value and two-letter ISO 639 code for each langauge
+- Specify a default langauge
+- Modify the `Expression` field
+- Click `SAVE`
+
+### Worked example
+
+To see how, consider this worked example for a simplified survey in Sénégal.
+
+#### Collect the list of interview langauges from `interview_language`
+
+For step 1, one navigates to `interview_language` and finds:
+
+```text
+Français..1
+Wolof.....2
+Poular......3
+Autre (À SPÉCIFIER)
+```
+
+#### Collect the two-letter ISO 639 language code for each language
+
+For step 2, one navigates to the list of ISO 639 language codes and finds:
+
+```text
+Français : fr
+Wolof : wo
+Poular : fc
+```
+
+For French and Wolof, there are entries.
+
+For Poular (Pulaar), one needs to exercise some creativity. Unfortunely, the language does not have a set 1 entry. However, it does belong to the Fulah macrolangauge, which does have a two-letter set 1 entry, and all members of the family have a three-letter set 2 code. See [here](https://iso639-3.sil.org/code/fuc).
+
+However, it seems possible to create a two-character clde. For almost all members of the Fulah macrolanguage, the three-letter code starts `fu` and ends with a uniquely identifying character. For ISO 369, there is no language with the two-letter code `fc`. Hence, it can be "claimed" for Poular.
+
+#### Update the expression in `lang_code`
+
+For step 3, one navigate to `lang_code` and finds the following template code:
+
+```cpp
+// English
+s00q12 == 1 ? "en" :
+// Language 2
+s00q12 == 2 ? "l2" :
+// Language 3
+s00q12 == 3 ? "l3" :
+// default language
+"en"
+```
+
+To adapt this to Sénégal, one needs to collect codes.
+
+```text
+Français..1
+Wolof.....2
+Poular......3
+```
+
+From there, one can update the code by having one block per language, deleting the two-letter codes from the template:
+
+```cpp
+// Français
+s00q12 == 1 ? "" :
+// Wolof
+s00q12 == 2 ? "" :
+// Pular
+s00q12 == 3 ? "" :
+// default language
+""
+```
+
+From there, one needs to apply the two-letter ISO 639 codes:
+
+```text
+Français : fr
+Wolof : wo
+Poular : fc
+```
+
+To the code:
+
+
+```cpp
+// Français
+s00q12 == 1 ? "fr" :
+// Wolof
+s00q12 == 2 ? "wo" :
+// Pular
+s00q12 == 3 ? "fc" :
+// default language
+""
+```
+
+And finally, one must designate a default language--that is, a language whose images to show if no language with images is selected.
+
+In practice, this should be the language mostly widely spoken by interviewers and/or respondents.
+
+For the case of Sénégal, one could select either French, the official language and likely spoken/read by educated interviewers, or Wolof, an increasingly common lingua franca.
+
+Let's choose French
+
+```cpp
+// Français
+s00q12 == 1 ? "fr" :
+// Wolof
+s00q12 == 2 ? "wo" :
+// Pular
+s00q12 == 3 ? "fc" :
+// default language
+"fr"
+```
+
+## Translation
+
+To avoid field translation by interviewers, implementers should translate the questionnaire into as many languages as possible, subject to budget, time, and other constraints (e.g., literacy).
+
+For more details on how to do this, read [this](https://docs.mysurvey.solutions/questionnaire-designer/toolbar/multilingual-questionnaires/) for technical implementers and [this](https://docs.mysurvey.solutions/faq/instructions-for-translators/) for translators.

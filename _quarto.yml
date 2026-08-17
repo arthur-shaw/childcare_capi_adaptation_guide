@@ -15,8 +15,8 @@ book:
         - implementer.qmd
         - eligibility.qmd
         - school.qmd
-        - context.qmd
         - experiments.qmd
+        - context.qmd
         - language.qmd
         # supply-side chapters
         - adapt_supply.qmd
