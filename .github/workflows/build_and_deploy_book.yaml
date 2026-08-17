@@ -1,0 +1,47 @@
+on:
+  push:
+    branches: main
+
+name: Build and deploy book to GitHub Pages
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v6.0.1
+
+      - name: Install and setup Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Render book
+        run: |
+          quarto render
+
+      - name: Upload artifacts to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "_book"
+
+  deploy:
+
+    needs: build
+
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
