@@ -47,6 +47,7 @@ book:
     #   chapters: 
     #     - variable_values.qmd
     #     - reusable_categories.qmd
+
 format:
   html:
     theme: cosmo
