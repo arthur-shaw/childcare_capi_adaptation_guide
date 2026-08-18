@@ -1,0 +1,5 @@
+# Upload
+
+To be shown in the questionnaire, the images that were generated in the previous section need to be uploaded as attachments. This section will describe the process for uploading those images and, if needed, updating them.
+
+For other questionnaires, this may seem trivial and inconsequential. For the demand-side questionnaire, however, it is critical that the images be associated with specific names so that the questionnaire's selection logic will choose them.

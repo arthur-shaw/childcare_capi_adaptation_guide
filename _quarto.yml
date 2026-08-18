@@ -29,10 +29,10 @@ book:
     #     - likert_scale_image.qmd
     #     - numbers.qmd
     # Upload
-    # - part: upload.qmd
-    #   chapters: 
-    #     - upload_dce_images.qmd
-    #     - upload_likert_images.qmd
+    - part: upload.qmd
+      chapters: 
+        - upload_dce_images.qmd
+        - upload_likert_images.qmd
     # Finalize
     # - part: "Finalize"
     #   chapters: 

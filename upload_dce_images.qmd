@@ -1,0 +1,38 @@
+# Discrete choice experiment images
+
+## Upload
+
+Often, there may be a mismatch between the name of the image file and the name that the CAPI application expects (e.g., the user has a file named `my-image-FINAL-2026-08.png` but wants an attachment named `rice_units`).
+
+Thankfully, for the demand-side questionnaire, the image files that were generated in the previous section have exactly the names that the CAPI application needs.
+
+For that reason, uploading the images is a simple exercise. Going image by image, the implementer should:
+
+- Open the `Attachments` panel from the left-hand pane in Designer
+- Click on the `UPLOAD NEW` button
+- Select an image from disk
+- Wait for the file to be attached to the questionnaire
+
+By following this process, the implementer ends up with a set of image attachments bearing the name of the underlying image--in other words, exactly what the CAPI application needs.
+
+Note: the implementer should follow this process for each language in for which the images have been generated.
+
+## Update
+
+Sometimes images need to be updated for one or more of the following reasons:
+
+- **Change childcare cost levels.** During piloting, one may have placeholder values. Before the survey, one may want to use actual values.
+- **Fix translation issues.** When images are generated, they rely on translations provided by the implementer--often in several languages. When images are reviewed or shown during a pilot, one may notice problems with translations.
+- **Fix layout issues.** The images use a table to display the dimensions of choice and the randomly selected levels. Sometimes the table dimensions need to be adjusted to accommodate certain translations or scripts.
+
+When images need to be updated, implementers need to act with care, since the CAPI application looks for images by name and the status of images--updated or not--can sometimes be challenging to discern.
+
+With all that in mind, here is the strongly recommended algorithm to follow for updating images for a given language:
+
+- **Delete all images.** That is, click on the X associated with each attachment. This will delete the image and the associated attachment object.
+- **Upload them all again.** That is, going image by image, follow the process in the [Upload section above](#upload)
+
+While this may seem needlessly draconian, it solves several practical problems that surface with alternate approaches:
+
+- **Provides clarity on what has been updated.** If the attachment object does not exist, the image has not been updated. No ambiguity about status.
+- **Avoids clicks and errors.** To update, one would need to: find the right attachment object, click on `UPDATE` for that object, select the right image from disk, and click `SAVE`. By deleting all old images, there are fewer clicks: just deleting, adding, and selecting. By deleting images, one eliminates the potential to create an accidental and difficult to identify mismatch between the attachment object and the image (e.g., attachment named `image_12_fr` that has the wrong image `image_11_fr.png`).

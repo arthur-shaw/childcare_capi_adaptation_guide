@@ -1,0 +1,11 @@
+# Likert scale
+
+Since the workflows are similar to those described for the discrete choice experiment images above, this section will simply describe where to and what names to use.
+
+## Upload
+
+Upload all files with names matching `likert_scale_agreement_{lang}`, where `{lang}` is the two-character language code.
+
+## Update
+
+While the same caveats apply to Likert scale images as to DCE images, the case for updating by deleting and re-uploading is less strong, since the number of language-specific images is manageably small: 1 image per language for Likert scales versus 60 images per language for DCE images.
