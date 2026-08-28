@@ -1,0 +1,7 @@
+# Numbers
+
+The demand- and supply-questionnaires, each in their own way, rely on externally generated random numbers to randomize part of the questionnaire. For the demand-side questionnaire, random numbers dictate which discrete choice experiment images will be shown to each household member. For the supply-side questionnaire, random numbers support selection of random classrooms for observation.
+
+To generate these numbers, the survey implementer must use an external project to generate these random numbers as tab-delimited data to be preloaded into survey assignments.
+
+To learn how to download, install, and use this project, read more [here](https://github.com/arthur-shaw/childcare_make_random_choice_draws).

@@ -24,20 +24,20 @@ book:
         - adapt_supply.qmd
     # Generate
     - part: generate.qmd
-    #   chapters: 
+      chapters: 
     #     - dce_images.qmd
     #     - likert_scale_image.qmd
-    #     - numbers.qmd
+        - numbers.qmd
     # Upload
     - part: upload.qmd
       chapters: 
         - upload_dce_images.qmd
         - upload_likert_images.qmd
     # Finalize
-    # - part: "Finalize"
-    #   chapters: 
-    #     - hide_numbers.qmd
+    - part: "Finalize"
+      chapters: 
     #     - test.qmd
+        - hide_numbers.qmd
     # Deploy
     # - part: deploy.qmd
     #   chapters: 

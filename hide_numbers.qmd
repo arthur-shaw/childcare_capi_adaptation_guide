@@ -1,0 +1,18 @@
+# Hide numbers
+
+The demand- and supply-side questionnaires each contain questions that are meant to capture the random numbers responsible for randomizing part of their questionnaires.
+
+To make testing easier, these questions have been left as Interviewer-scope questions. This allows desktop testing where random numbers, like those in the examples [here](https://github.com/arthur-shaw/childcare_make_random_choice_draws#retreive) and [here](https://github.com/arthur-shaw/childcare_make_random_choice_draws#retreive-1), to be copied and pasted into an interview rather than preloaded through an assignment. 
+
+But before the questionnaire is deployed for data collection--probably before piloting and definitely before data collection--these questions need to be changed from Interviewer scope to Hidden. That way, the values can be preloaded into assignments and not be seen or changed by interviewers.
+
+To do so:
+
+- Navigate to the question
+- Change the `Question scope` field to `Hidden`.
+
+Which questions are these?
+
+For the demand-side questionnaire: `random_dce_images`, found [here](https://designer.mysurvey.solutions/q/details/634a3bb2e2914cbdbef06b760655c4e2/chapter/ac5c7bc68f5cb6a3f811f0c7d82b30f0/question/d735dc0b5ee026f4867e5c38315c3e4a) in the global template
+
+For the supply-side questionnaire: `random_class_order`, found [here](https://designer.mysurvey.solutions/q/details/722a97e92ffa49459bb042a001b57c47/chapter/a4411829e0407956752503dbfb4424ac/question/7fc873b4d8914e9fbe8f8fd3bb3545e9).
